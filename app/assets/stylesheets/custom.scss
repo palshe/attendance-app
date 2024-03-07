@@ -9,7 +9,7 @@ $gray-medium-light: #eaeaea;
 @mixin box_sizing{
   -moz-box-sizin: border-box;
   -webkit-box-sizing: border-box;
-  bax-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* universal */
@@ -105,3 +105,16 @@ footer {
     width: 100%;
     margin-top: 45px;
   }
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 30%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
