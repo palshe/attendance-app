@@ -1,11 +1,15 @@
 <% provide(:title, "出退勤") %>
 
-<%=  form_with(url: attendance_path, scope: :worker, method: :post, local: true) do |f| %>
-  <%= f.label :name, "名前" %>
-  <%= f.text_field :name %><br />
-  <%= f.radio_button :attendance_type, :arrival %>
-  <%= f.label :attendance_type, "出勤" %><br />
-  <%= f.radio_button :attendance_type, :left %>
-  <%= f.label :attendance_type, "退勤" %><br />
-  <%= f.submit "送信", class: "btn btn-primary"%>
-<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%=  form_with(url: attendance_path, scope: :worker, method: :post, local: true) do |f| %>
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: "form-control" %><br />
+      <%= f.radio_button :attendance_type, :arrival %>
+      <%= f.label :attendance_type, "出勤" %><br />
+      <%= f.radio_button :attendance_type, :left %>
+      <%= f.label :attendance_type, "退勤" %><br />
+      <%= f.submit "送信", class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</div>

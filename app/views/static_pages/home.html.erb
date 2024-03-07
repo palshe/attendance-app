@@ -1,12 +1,9 @@
 <% provide(:title, "ホーム")%>
 
 <div class="center jumbotron">
-  <% if true%>
-  <% comment_out %>
-  <% else %>
-  <% if session[:admin] = true %>
+  <% if logged_in? %>
   <%= render 'static_pages/home_admin'%>
-  <% end %>
-  <% end %>
+  <% else %>
   <%= render 'static_pages/home_not_admin'%>
+  <% end %>
 </div>

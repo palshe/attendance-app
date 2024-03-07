@@ -3,10 +3,10 @@
     <%= link_to "勤怠くん", root_path, id:"logo" %>
     <nav>
       <ul id = "navbar-menu" class="nav navbar-nav navbar-right collapse navbar-collapse">
-        <% if session[:admin] = true %>
-        <li><%= link_to "ログアウト", '#', data:{"turbo-method": :delete}, method: :delete %></li>
+        <% if logged_in? %>
+        <li><%= link_to "ログアウト", logout_path, data:{"turbo-method": :delete}, method: :delete %></li>
         <% else %>
-        <li><%= link_to "管理者用ログイン", '#' %></li>
+        <li><%= link_to "管理者用ログイン", login_path %></li>
         <% end %>
       </ul>
     </nav>  
