@@ -3,8 +3,11 @@ class AttendancesController < ApplicationController
   def attendance
     if @worker = Worker.find_by(name: params[:worker][:name])
       if params[:worker][:attendance_type] == "arrival"
-        update_todays_attendance("arrived")
-        flash[:success] = "#{@attendance_today.arrived_at.to_s(:ja)} #{@worker.name}の出勤が完了しました。"
+        if update_todays_attendance("arrived")
+          flash[:success] = "#{@attendance_today.arrived_at.to_s(:ja)} #{@worker.name}の出勤が完了しました。"
+        else
+          flash[:danger] = "エラーが発生しました。管理者に連絡してください。"
+        end
       else
         if params[:worker][:attendance_type] == "left"
           update_todays_attendance("left")
@@ -21,8 +24,10 @@ class AttendancesController < ApplicationController
   end
 
   def update_todays_attendance(attribute)
-    @attendance_today = @worker.attendances.find_by(date: Date.today)
-    @attendance_today.update_attribute("#{attribute}_at", Time.now)
+    if @attendance_today = @worker.attendances.find_by(date: Date.today)
+      @attendance_today.update_attribute("#{attribute}_at", Time.now)
+    end
+    @attendance_today
   end
 
   def overtime_cul
