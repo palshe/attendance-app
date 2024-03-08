@@ -1,0 +1,17 @@
+<% provide(:title, "従業員一覧") %>
+
+<h1>従業員一覧</h1>
+
+<%= will_paginate %>
+
+<ul class="workers">
+  <% @workers.each do |worker| %>
+    <li>
+      <%= link_to worker.name, worker %>
+      | <%= link_to "削除する", worker, data: { "turbo-method": :delete, turbo_confirm: "#{worker.name}を削除しますか？"} %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %> <br />
+<%= link_to "ホームへ戻る", root_path %>

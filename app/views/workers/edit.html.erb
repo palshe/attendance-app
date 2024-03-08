@@ -1,0 +1,14 @@
+<% provide(:title, "名前を変更") %>
+
+<h1>名前を変更</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @worker, local: true) do |f| %>
+
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.submit "変更する", class: "btn btn-primary" %>
+    <%end%>
+  </div>
+</div>

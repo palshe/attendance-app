@@ -10,9 +10,15 @@ class AttendancesController < ApplicationController
         end
       else
         if params[:worker][:attendance_type] == "left"
-          update_todays_attendance("left")
-          overtime_cul
-          flash[:success] = "#{@attendance_today.arrived_at.to_s(:ja)} #{@worker.name}の退勤が完了しました。残業時間は#{@attendance_today.overtime.to_s}秒です"
+          if update_todays_attendance("left")
+            if overtime_cul
+              flash[:success] = "#{@attendance_today.arrived_at.to_s(:ja)} #{@worker.name}の退勤が完了しました。"
+            else
+              flash[:danger] = "出勤を忘れています。出勤するか、管理者に報告してください。"
+            end
+          else
+            flash[:danger] = "エラーが発生しました。管理者に連絡してください。"
+          end
         else
           flash[:danger] = "出退勤を選んでください。"
         end
@@ -31,11 +37,15 @@ class AttendancesController < ApplicationController
   end
 
   def overtime_cul
-    overtime = (@attendance_today.left_at - @attendance_today.arrived_at) - 8.hours
-    if overtime < 0
-      @attendance_today.update_attribute(:overtime, 0)
+    if @attendance_today.arrived_at.nil?
     else
-      @attendance_today.update_attribute(:overtime, overtime)
+      overtime = (@attendance_today.left_at - @attendance_today.arrived_at) - 8.hours
+      if overtime < 0
+        @attendance_today.update_attribute(:overtime, 0)
+      else
+        @attendance_today.update_attribute(:overtime, overtime)
+      end
     end
+    @attendance_today.overtime
   end
 end
