@@ -14,15 +14,16 @@ end
 
 worker = Worker.first
 setting_day = Time.new(2024, 2, 1, 0, 0, 0)
-30.times do |n|
+(0..28).each do |n|
   arrived = (setting_day + n.days) + 9.hours
   left = arrived + 8.hours + (10*n).minutes + 10*n
   if left - arrived - 8.hours < 0
     over = 0
   else
-    over = left - arrived
+    over = left - arrived - 8.hours
+  end
   worker.attendances.create!(
-    date: Date.new(2024, 2, 1 + n)
+    date: Date.new(2024, 2, 1 + n),
     arrived_at: arrived,
     left_at: left,
     overtime: over
@@ -31,5 +32,4 @@ end
 
 worker.attendances.create!(
   date: Date.today
-
 )

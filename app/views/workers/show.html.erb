@@ -1,3 +1,10 @@
 <% provide(:title, @worker.name) %>
 
 <h1 class="name"><%= @worker.name %> <%= link_to "変更", edit_worker_path, class: "btn btn-primary" %> </h1>
+
+<% if @worker.attendances.any? %>
+  <ol class="attendances">
+    <%= render @attendances %>
+  </ol>
+  <%= will_paginate @attendances %>
+<% end %>

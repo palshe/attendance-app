@@ -3,6 +3,7 @@ class WorkersController < ApplicationController
 
   def show
     @worker = Worker.find(params[:id])
+    @attendances = @worker.attendances.paginate(page: params[:page])
   end
 
   def new

@@ -19,8 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_131956) do
 
   create_table "attendances", force: :cascade do |t|
     t.date "date"
-    t.datetime "arrived_at"
-    t.datetime "left_at"
+    t.time "arrived_at"
+    t.time "left_at"
     t.float "overtime"
     t.integer "worker_id", null: false
     t.datetime "created_at", null: false
