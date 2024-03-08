@@ -29,23 +29,28 @@ class AttendancesController < ApplicationController
     redirect_to root_path
   end
 
-  def update_todays_attendance(attribute)
-    if @attendance_today = @worker.attendances.find_by(date: Date.today)
-      @attendance_today.update_attribute("#{attribute}_at", Time.now)
-    end
-    @attendance_today
+  def show
   end
 
-  def overtime_cul
-    if @attendance_today.arrived_at.nil?
-    else
-      overtime = (@attendance_today.left_at - @attendance_today.arrived_at) - 8.hours
-      if overtime < 0
-        @attendance_today.update_attribute(:overtime, 0)
-      else
-        @attendance_today.update_attribute(:overtime, overtime)
+  private
+
+    def update_todays_attendance(attribute)
+      if @attendance_today = @worker.attendances.find_by(date: Date.today)
+        @attendance_today.update_attribute("#{attribute}_at", Time.now)
       end
+      @attendance_today
     end
-    @attendance_today.overtime
-  end
+
+    def overtime_cul
+      if @attendance_today.arrived_at.nil?
+      else
+        overtime = (@attendance_today.left_at - @attendance_today.arrived_at) - 8.hours
+        if overtime < 0
+          @attendance_today.update_attribute(:overtime, 0)
+        else
+          @attendance_today.update_attribute(:overtime, overtime)
+        end
+      end
+      @attendance_today.overtime
+    end
 end
