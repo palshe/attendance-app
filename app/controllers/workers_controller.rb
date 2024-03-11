@@ -10,7 +10,7 @@ class WorkersController < ApplicationController
     @worker = Worker.includes(:attendances).find(params[:id])
     start_date = Date.parse(params[:worker][:start])
     end_date = Date.parse(params[:worker][:end])
-    @attendances = Attendance.where("date >= ? and date <= ?", start_date, end_date) 
+    @attendances = Attendance.where("date >= ? and date <= ?", start_date, end_date)
   end
 
   def new
