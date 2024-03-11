@@ -1,6 +1,8 @@
 <% provide(:title, "残業時間") %>
 
-<% if @worker.attendances.any? %>
+<h1><%= "#{@start_date.in_time_zone.to_s(:dja)}" %>から<%= "#{@end_date.in_time_zone.to_s(:dja)}" %>までの総残業時間は<div class="red"><%= "#{(@overtime/60/60).floor(2)}時間" %></div></h1><br />
+以下詳細
+<% if !@attendances.nil? %>
   <ol class="attendances">
     <%= render @attendances %>
   </ol>

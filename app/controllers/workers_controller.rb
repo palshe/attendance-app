@@ -8,9 +8,40 @@ class WorkersController < ApplicationController
 
   def overtime
     @worker = Worker.includes(:attendances).find(params[:id])
-    start_date = Date.parse(params[:worker][:start])
-    end_date = Date.parse(params[:worker][:end])
-    @attendances = Attendance.where("date >= ? and date <= ?", start_date, end_date)
+    if !params[:worker].nil?
+      if !params[:worker][:start].nil?
+        if !params[:worker][:end].nil?
+          @start_date = Date.parse(params[:worker][:start])
+          @end_date = Date.parse(params[:worker][:end])
+          if (@end_date - @start_date).to_i < 0
+            flash[:danger] = "検索日が不適切です。"
+            redirect_to @worker, status: :unprocessable_entity
+          else
+            @attendances = Attendance.where("worker_id = ? and date >= ? and date <= ?", @worker.id, @start_date, @end_date)
+            if !@attendances.blank?
+              @overtime = 0.0
+              @attendances.each do |at|
+                @overtime += at.overtime
+              end
+              @overtime
+              flash.now[:success] = "検索しました。"
+            else
+              flash[:danger] = "レコードが存在しない日付を選択しています。"
+              redirect_to @worker, status: :unprocessable_entity
+            end
+          end
+        else
+          flash[:danger] = "日付を入力してください。"
+          redirect_to @worker, stasus: :unprocessable_entity
+        end
+      else
+        flash[:danger] = "日付を入力してください。"
+        redirect_to @worker, stasus: :unprocessable_entity
+      end
+    else
+    flash[:danger] = "日付を入力してください。"
+    redirect_to @worker, stasus: :unprocessable_entity
+    end
   end
 
   def new

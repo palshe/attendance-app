@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :workers
   resources :workers do
     member do
-      post 'overtime'
+      get 'overtime'
     end
   end
 end
