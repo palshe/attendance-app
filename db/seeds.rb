@@ -13,7 +13,7 @@ name: "石井春輝",
 end
 
 worker = Worker.first
-setting_day = Time.new(2024, 2, 1, 0, 0, 0)
+setting_day = Time.zone.parse('2024-02-01 00:00:00')
 (0..28).each do |n|
   arrived = (setting_day + n.days) + 9.hours
   left = arrived + 8.hours + (10*n).minutes + 10*n
@@ -23,7 +23,7 @@ setting_day = Time.new(2024, 2, 1, 0, 0, 0)
     over = left - arrived - 8.hours
   end
   worker.attendances.create!(
-    date: Date.new(2024, 2, 1 + n),
+    date: Time.zone.parse("2024-02-#{1+n}").to_date,
     arrived_at: arrived,
     left_at: left,
     overtime: over

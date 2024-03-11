@@ -2,6 +2,15 @@
 
 <h1 class="name"><%= @worker.name %> <%= link_to "変更", edit_worker_path, class: "btn btn-primary" %> </h1>
 
+<div class="form-label">残業時間を出す</div>
+
+<%= form_with(url: overtime_worker_path, scope: :worker, local: true) do |f| %>
+  <%= f.date_field :start%>
+  から
+  <%= f.date_field :end %>
+  まで
+<% end %>
+
 <% if @worker.attendances.any? %>
   <ol class="attendances">
     <%= render @attendances %>

@@ -1,0 +1,7 @@
+<% provide(:title, "残業時間") %>
+
+<% if @worker.attendances.any? %>
+  <ol class="attendances">
+    <%= render @attendances %>
+  </ol>
+<% end %>

@@ -6,6 +6,13 @@ class WorkersController < ApplicationController
     @attendances = @worker.attendances.paginate(page: params[:page])
   end
 
+  def overtime
+    @worker = Worker.includes(:attendances).find(params[:id])
+    start_date = Date.parse(params[:worker][:start])
+    end_date = Date.parse(params[:worker][:end])
+    @attendances = Attendance.where("date >= ? and date <= ?", start_date, end_date) 
+  end
+
   def new
     @worker = Worker.new
   end
