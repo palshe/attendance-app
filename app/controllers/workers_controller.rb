@@ -32,15 +32,15 @@ class WorkersController < ApplicationController
           end
         else
           flash[:danger] = "日付を入力してください。"
-          redirect_to @worker, stasus: :unprocessable_entity
+          redirect_to @worker, status: :unprocessable_entity
         end
       else
         flash[:danger] = "日付を入力してください。"
-        redirect_to @worker, stasus: :unprocessable_entity
+        redirect_to @worker, status: :unprocessable_entity
       end
     else
     flash[:danger] = "日付を入力してください。"
-    redirect_to @worker, stasus: :unprocessable_entity
+    redirect_to @worker, status: :unprocessable_entity
     end
   end
 
@@ -51,7 +51,7 @@ class WorkersController < ApplicationController
   def create
     @worker = Worker.new(worker_params)
     if @worker.save
-      flash[:success] = "#{@worker.name}の追加が完了しました"
+      flash[:success] = "#{@worker.name}の追加が完了しました。"
       redirect_to new_worker_path
     else
       flash.now[:danger] = "名前が入力されていないか、すでに存在する従業員です。"

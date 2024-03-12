@@ -3,14 +3,14 @@
     <% if attendance.left_at.nil? %>
      入力なし
     <% else %>
-      <%= attendance.left_at.to_s(:ja) %>
+      <%= attendance.left_at.to_fs(:ja) %>
     <% end %>
   </span>
   <span class="content">出勤&emsp;&emsp;&nbsp;|
     <% if attendance.arrived_at.nil? %>
      入力なし
     <% else %>
-      <%= attendance.arrived_at.to_s(:ja) %>
+      <%= attendance.arrived_at.to_fs(:ja) %>
     <% end %>
   </span>
   <% overtime = attendance.overtime %>

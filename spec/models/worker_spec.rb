@@ -11,7 +11,7 @@ RSpec.describe Worker, type: :model do
     expect(worker2).to be_invalid
   end
   it "名前が同じなら無効" do
-    p worker1
+    worker1.reload
     worker2.name = "石井春輝"
     expect(worker2).to be_invalid
   end

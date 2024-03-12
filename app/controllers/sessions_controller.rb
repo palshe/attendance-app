@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if admin &. authenticate(params[:session][:password])
       reset_session
       log_in admin
+      flash[:success] = "ログインしました。"
       redirect_to root_path
     else
       flash.now[:danger] = "パスワードが間違っています。"
