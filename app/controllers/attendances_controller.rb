@@ -47,8 +47,8 @@ class AttendancesController < ApplicationController
   private
 
     def update_todays_attendance(attribute)
-      if @attendance_today = @worker.attendances.find_by(date: Date.today)
-        @attendance_today.update_attribute("#{attribute}_at", Time.now)
+      if @attendance_today = @worker.attendances.find_by(date: Date.current)
+        @attendance_today.update_attribute("#{attribute}_at", Time.zone.now)
       end
       @attendance_today
     end
