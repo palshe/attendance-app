@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :logged_in_admin?, only: [:create]
 
   def attendance
     if @worker = Worker.find_by(name: params[:worker][:name])
@@ -29,7 +30,18 @@ class AttendancesController < ApplicationController
     redirect_to root_path
   end
 
-  def show
+  def create
+    @workers = Worker.all
+    today = Date.current
+    begin
+      @workers.each do |worker|
+        worker.attendances.create!(date: today)
+      end
+      flash[:success] = "本日のレコードを作成しました。"
+    rescue => e
+      flash[:danger] = "本日のレコードはすでに作られています。"
+    end
+    redirect_to root_path
   end
 
   private

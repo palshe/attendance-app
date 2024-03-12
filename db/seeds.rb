@@ -29,7 +29,3 @@ setting_day = Time.zone.parse('2024-02-01 00:00:00')
     overtime: over
   )
 end
-
-worker.attendances.create!(
-  date: Date.today
-)

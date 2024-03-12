@@ -9,5 +9,6 @@ class CreateAttendances < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :attendances, [:date, :worker_id], unique: true
   end
 end
