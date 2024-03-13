@@ -10,14 +10,14 @@ RSpec.describe AttendancesController, type: :request do
     before(:each) do
       attendance.reload
     end
-    it "正しく出勤で200" do
+    it "正しく出勤で302" do
       post attendance_path, params:{ worker: { name: "石井春輝", attendance_type: "arrival" } }
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:found)
     end
-    it "正しく退勤で200" do
+    it "正しく退勤で302" do
       post attendance_path, params:{ worker: { name: "石井春輝", attendance_type: "arrival" } }
       post attendance_path, params:{ worker: { name: "石井春輝", attendance_type: "left" } }
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:found)
     end
     it "存在しないアカウントで422" do
       post attendance_path, params:{ worker: { name: "Ishii Haruki", attendance_type: "arrival" } }
@@ -41,8 +41,8 @@ RSpec.describe AttendancesController, type: :request do
     it "1回目はレコード作成が成功、2回目は失敗" do
       post login_path, params: { session: { password: "111111",
                                             password_confirmation: "111111" }}
-      expect{ get attendance_path }.to change{ worker.attendances.count }.by(1)
-      expect{ get attendance_path }.to change{ worker.attendances.count }.by(0)
+      expect{ get attendances_path }.to change{ worker.attendances.count }.by(1)
+      expect{ get attendances_path }.to change{ worker.attendances.count }.by(0)
     end
   end
 end

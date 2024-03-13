@@ -6,7 +6,8 @@ class AttendancesController < ApplicationController
       if params[:worker][:attendance_type] == "arrival"
         if update_todays_attendance("arrived")
           flash[:success] = "#{@attendance_today.arrived_at.to_fs(:ja)} #{@worker.name}の出勤が完了しました。"
-          redirect_to root_path, status: :ok and return
+          redirect_to root_path
+          return
         else
           flash[:danger] = "エラーが発生しました。管理者に連絡してください。"
         end
@@ -15,7 +16,8 @@ class AttendancesController < ApplicationController
           if update_todays_attendance("left")
             if overtime_cul
               flash[:success] = "#{@attendance_today.arrived_at.to_fs(:ja)} #{@worker.name}の退勤が完了しました。"
-              redirect_to root_path, status: :ok and return
+              redirect_to root_path
+              return
             else
               flash[:danger] = "出勤を忘れています。出勤するか、管理者に報告してください。"
             end

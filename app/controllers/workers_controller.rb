@@ -8,9 +8,9 @@ class WorkersController < ApplicationController
 
   def overtime
     @worker = Worker.includes(:attendances).find(params[:id])
-    if !params[:worker].nil?
-      if !params[:worker][:start].nil?
-        if !params[:worker][:end].nil?
+    if !params[:worker].blank?
+      if !params[:worker][:start].blank?
+        if !params[:worker][:end].blank?
           @start_date = Date.parse(params[:worker][:start])
           @end_date = Date.parse(params[:worker][:end])
           if (@end_date - @start_date).to_i < 0
