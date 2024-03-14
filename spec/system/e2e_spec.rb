@@ -130,16 +130,18 @@ RSpec.describe "エンドツーエンド", type: :system do
           visit root_path
           click_link "本日のレコードを作成"
           click_link "本日のレコードを作成"
-          visit root_path
           expect(page).to have_content "本日のレコードはすでに作られています。"
         end
         it "レコードを作成してから、従業員を追加して、またレコードを作成" do
           visit root_path
-          expect(page).to have_link "本日のレコードを作成", href: attendances_path
+          expect(page.status_code).to eq (200)
+          expect(current_path).to eq root_path
+          expect(page).to have_link "本日のレコードを作成", href: attendances_create_path
           click_link "本日のレコードを作成"
           visit new_worker_path
           fill_in 'worker[name]', with: "いしいはるき"
           click_button "追加する"
+          visit root_path
           click_link "本日のレコードを作成"
           expect(page).to have_content "本日のレコードはすでに作られています。"
         end

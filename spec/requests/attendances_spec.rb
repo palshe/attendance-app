@@ -41,8 +41,8 @@ RSpec.describe AttendancesController, type: :request do
     it "1回目はレコード作成が成功、2回目は失敗" do
       post login_path, params: { session: { password: "111111",
                                             password_confirmation: "111111" }}
-      expect{ get attendances_path }.to change{ worker.attendances.count }.by(1)
-      expect{ get attendances_path }.to change{ worker.attendances.count }.by(0)
+      expect{ get attendances_create_path }.to change{ worker.attendances.count }.by(1)
+      expect{ get attendances_create_path }.to change{ worker.attendances.count }.by(0)
     end
   end
 end
