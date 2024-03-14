@@ -54,8 +54,8 @@ class WorkersController < ApplicationController
       flash[:success] = "#{@worker.name}の追加が完了しました。"
       redirect_to new_worker_path
     else
-      flash.now[:danger] = "名前が入力されていないか、すでに存在する従業員です。"
-      render 'new' , status: :unprocessable_entity
+      flash[:danger] = "名前が入力されていないか、すでに存在する従業員です。"
+      redirect_to new_worker_path, status: :unprocessable_entity
     end
   end
 
@@ -69,8 +69,8 @@ class WorkersController < ApplicationController
       flash[:success] = "名前を変更しました。"
       redirect_to @worker
     else
-      flash.now[:danger] = "名前が入力されていないか、同じ名前の従業員が存在してます。"
-      render 'edit' , status: :unprocessable_entity
+      flash[:danger] = "名前が入力されていないか、同じ名前の従業員が存在してます。"
+      redirect_to edit_worker_path(@worker), status: :unprocessable_entity
     end
   end
 

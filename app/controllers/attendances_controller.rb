@@ -42,10 +42,11 @@ class AttendancesController < ApplicationController
         worker.attendances.create!(date: today)
       end
       flash[:success] = "本日のレコードを作成しました。"
+      redirect_to root_path, status: :see_other
     rescue => e
       flash[:danger] = "本日のレコードはすでに作られています。"
+      redirect_to root_path, status: :unprocessable_entity
     end
-    redirect_to root_path
   end
 
   private
