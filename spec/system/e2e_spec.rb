@@ -90,7 +90,7 @@ RSpec.describe "エンドツーエンド", type: :system do
       end
     end
     describe "従業員の追加、レコード作成" do
-      before do
+      before(:each) do
         visit login_path
         fill_in 'session[password]', with:"111111"
         click_button "ログイン"
@@ -145,6 +145,57 @@ RSpec.describe "エンドツーエンド", type: :system do
           click_link "本日のレコードを作成"
           expect(page).to have_content "本日のレコードはすでに作られています。"
         end
+      end
+    end
+    describe "従業員一覧、従業員削除、個別表示、名前変更、残業時間表示" do
+      let(:other_worker){ create(:worker, name: "いしいはるき") }
+      let(:attendance1){ create(:attendance, worker: worker) }
+      let(:attendance2){ create(:attendance, worker: worker, date: Date.parse("2024-02-02"), arrived_at: Time.zone.parse("2024-02-02 09:00:00"), left_at: Time.zone.parse("2024-02-02 20:00:00"))}
+      before(:each) do
+        other_worker.reload
+        attendance1.reload
+        attendance2.reload
+        visit login_path
+        fill_in 'session[password]', with:"111111"
+        click_button "ログイン"
+      end
+      context "正しい操作" do
+        it "一覧表示をして、詳細へ移って、名前を変更した後に、残業時間を出す" do
+          visit root_path
+          click_link "従業員一覧"
+          expect(current_path).to eq workers_path
+          expect(page).to have_link "石井春輝", href: worker_path(worker)
+          expect(page).to have_link "いしいはるき", href: worker_path(other_worker)
+          expect(page).to have_link "削除する", href: worker_path(worker)
+          expect(page).to have_link "ホームに戻る", href: root_path
+          click_link "石井春輝"
+          expect(page).to have_content "#{Time.zone.parse("2024-02-01 09:00:00").to_fs(:ja)}"
+          expect(page).to have_content "#{Time.zone.parse("2024-02-01 20:00:00").to_fs(:ja)}"
+          expect(page).to have_content "#{(attendance1.overtime/60/60).floor(2).to_s}"
+          expect(page).to have_content "#{Time.zone.parse("2024-02-02 09:00:00").to_fs(:ja)}"
+          expect(page).to have_content "#{Time.zone.parse("2024-02-02 09:00:00").to_fs(:ja)}"
+          expect(page).to have_content "#{(attendance2.overtime/60/60).floor(2).to_s}"
+          click_link "変更"
+          fill_in 'worker[name]', with: "イシイハルキ"
+          click_button "変更する"
+          expect(current_path).to eq worker_path(worker)
+          expect(page).to have_content "名前を変更しました。"
+          worker.reload
+          expect(worker.name).to eq "イシイハルキ"
+          expect(page).to have_field 'worker[start]'
+          expect(page).to have_field 'worker[end]'
+          fill_in 'worker[start]', with: "002024-02-01"
+          fill_in 'worker[end]', with: "002024-02-02"
+          click_button "検索"
+          expect(page).to have_content "検索しました。"
+          expect(page).to have_content "2024年02月01日から2024年02月02日までの総残業時間は"
+          expect(page).to have_content "6.0時間"
+          expect(page).to have_content "#{Time.zone.parse("2024-02-01 09:00:00").to_fs(:ja)}"
+          expect(page).to have_content "#{Time.zone.parse("2024-02-02 09:00:00").to_fs(:ja)}"
+        end
+      end
+      context "間違った操作" do
+        
       end
     end
   end

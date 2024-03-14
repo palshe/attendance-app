@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_06_131956) do
     t.date "date"
     t.datetime "arrived_at"
     t.datetime "left_at"
-    t.float "overtime"
+    t.float "overtime", default: 0.0
     t.integer "worker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -4,7 +4,7 @@ class CreateAttendances < ActiveRecord::Migration[7.0]
       t.date :date
       t.datetime :arrived_at
       t.datetime :left_at
-      t.float :overtime
+      t.float :overtime, default: 0
       t.references :worker, null: false, foreign_key: true
 
       t.timestamps
