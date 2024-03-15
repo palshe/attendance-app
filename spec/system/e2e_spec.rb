@@ -195,8 +195,71 @@ RSpec.describe "エンドツーエンド", type: :system do
         end
       end
       context "間違った操作" do
-        
+        it "名前が空欄" do
+          visit edit_worker_path(worker)
+          fill_in 'worker[name]', with: ""
+          click_button "変更する"
+          visit edit_worker_path(worker)
+          expect(page).to have_content "名前が入力されていないか、同じ名前の従業員が存在してます。"
+        end
+        it "同じ名前" do
+          visit edit_worker_path(worker)
+          fill_in 'worker[name]', with: "いしいはるき"
+          click_button "変更する"
+          visit edit_worker_path(worker)
+          expect(page).to have_content "名前が入力されていないか、同じ名前の従業員が存在してます。"
+        end
+        it "日付を入力しない" do
+          visit worker_path(worker)
+          fill_in 'worker[start]', with: ""
+          fill_in 'worker[end]', with: ""
+          click_button "検索"
+          visit worker_path(worker)
+          expect(page).to have_content "日付を入力してください。"
+        end
+        it "開始と終了が逆" do
+          visit worker_path(worker)
+          fill_in 'worker[start]', with: "002024-02-02"
+          fill_in 'worker[end]', with: "002024-02-01"
+          click_button "検索"
+          visit worker_path(worker)
+          expect(page).to have_content "検索日が不適切です。"
+        end
+        it "存在しない日付" do
+          visit worker_path(worker)
+          fill_in 'worker[start]', with: "002024-07-01"
+          fill_in 'worker[end]', with: "002024-07-02"
+          click_button "検索"
+          visit worker_path(worker)
+          expect(page).to have_content "レコードが存在しない日付を選択しています。"
+        end
       end
+    end
+  end
+  describe "ログインしないでアクセス" do
+    it "本日のレコード作成" do
+      visit attendances_create_path
+      expect(current_path).to eq login_path
+    end
+    it "従業員一覧" do
+      visit workers_path
+      expect(current_path).to eq login_path
+    end
+    it "従業員作成" do
+      visit new_worker_path
+      expect(current_path).to eq login_path
+    end
+    it "個別表示" do
+      visit worker_path(worker)
+      expect(current_path).to eq login_path
+    end
+    it "名前編集" do
+      visit edit_worker_path(worker)
+      expect(current_path).to eq login_path
+    end
+    it "残業時間表示" do
+      visit overtime_worker_path(worker)
+      expect(current_path).to eq login_path
     end
   end
 end
