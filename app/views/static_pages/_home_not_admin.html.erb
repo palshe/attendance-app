@@ -5,10 +5,12 @@
     <%=  form_with(url: attendance_path, scope: :worker, method: :post, local: true) do |f| %>
       <%= f.label :name, "名前" %>
       <%= f.text_field :name, class: "form-control" %><br />
-      <%= f.radio_button :attendance_type, :arrival %>
-      <%= f.label :attendance_type, "出勤" %><br />
-      <%= f.radio_button :attendance_type, :left %>
-      <%= f.label :attendance_type, "退勤" %><br />
+      <div class="radio_button">
+        <%= f.radio_button :attendance_type, :arrival, id: "select_arrived"%>
+        <%= f.label :attendance_type, "出勤", for: "select_arrived" %><br />
+        <%= f.radio_button :attendance_type, :left, id: "select_left"  %>
+        <%= f.label :attendance_type, "退勤", for: "select_left" %><br />
+      </div>
       <%= f.submit "送信", class: "btn btn-primary"%>
     <% end %>
   </div>

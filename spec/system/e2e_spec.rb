@@ -17,14 +17,14 @@ RSpec.describe "エンドツーエンド", type: :system do
     describe "出退勤" do
       context "正しい操作" do
         it "出勤したあと退勤する" do
-          choose 'worker_attendance_type_arrival'
+          choose 'select_arrived'
           click_button "送信"
           attendance.reload
           expect(attendance.arrived_at.nil?).to be_falsey
           expect(current_path).to eq root_path
           expect(page).to have_content "#{attendance.arrived_at.to_fs(:ja)} #{worker.name}の出勤が完了しました。"
           fill_in 'worker[name]', with: "石井春輝"
-          choose 'worker_attendance_type_left'
+          choose 'select_left'
           click_button "送信"
           attendance.reload
           expect(attendance.left_at.nil?).to be_falsey
@@ -35,7 +35,7 @@ RSpec.describe "エンドツーエンド", type: :system do
       context "間違った操作" do
         it "名前が間違っている" do
           fill_in 'worker[name]', with: ""
-          choose 'worker_attendance_type_arrival'
+          choose 'select_arrived'
           click_button "送信"
           attendance.reload
           expect(attendance.arrived_at.nil?).to be_truthy
@@ -50,7 +50,7 @@ RSpec.describe "エンドツーエンド", type: :system do
           expect(page).to have_content "出退勤を選んでください。"
         end
         it "退勤から選んでしまう" do
-          choose 'worker_attendance_type_left'
+          choose 'select_left'
           click_button "送信"
           attendance.reload
           expect(attendance.arrived_at.nil?).to be_truthy

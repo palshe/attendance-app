@@ -1,6 +1,7 @@
 <% provide(:title, "名前を変更") %>
 
 <h1>名前を変更</h1>
+<div class="center jumbotron">
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @worker, local: true) do |f| %>
@@ -12,4 +13,5 @@
     <%end%>
     <%= link_to "前のページに戻る", @worker %>
   </div>
+</div>
 </div>

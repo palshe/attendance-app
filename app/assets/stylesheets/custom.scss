@@ -153,6 +153,27 @@ input {
   font-weight: bold;
 }
 
+.radio_button {
+  width: 20%;
+  margin-left: 40%;
+  margin-bottom: 5%;
+}
+
+.date_field {
+  display: block;
+  background-color: $gray-medium-light;
+  padding-left: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1px;
+  .date{
+    width: auto;
+    display: inline-block;
+  }
+  .btn{
+    width: 10%;
+  }
+}
+
 /* Workers index */
 
 .workers {

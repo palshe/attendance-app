@@ -7,17 +7,18 @@ class AttendancesController < ApplicationController
         if update_todays_attendance("arrived")
           flash[:success] = "#{@attendance_today.arrived_at.to_fs(:ja)} #{@worker.name}の出勤が完了しました。"
           redirect_to root_path
-          return
+          return if performed?
         else
           flash[:danger] = "エラーが発生しました。管理者に連絡してください。"
         end
       else
         if params[:worker][:attendance_type] == "left"
           if update_todays_attendance("left")
-            if overtime_cul
+            if !@attendance_today.arrived_at.nil?
+              overtime_cul
               flash[:success] = "#{@attendance_today.arrived_at.to_fs(:ja)} #{@worker.name}の退勤が完了しました。"
               redirect_to root_path
-              return
+              return if performed?
             else
               flash[:danger] = "出勤を忘れています。出勤するか、管理者に報告してください。"
             end
@@ -58,15 +59,11 @@ class AttendancesController < ApplicationController
     end
 
     def overtime_cul
-      if @attendance_today.arrived_at.nil?
+      overtime = (@attendance_today.left_at - @attendance_today.arrived_at) - 8.hours
+      if overtime < 0
+        @attendance_today.update_attribute(:overtime, 0)
       else
-        overtime = (@attendance_today.left_at - @attendance_today.arrived_at) - 8.hours
-        if overtime < 0
-          @attendance_today.update_attribute(:overtime, 0)
-        else
-          @attendance_today.update_attribute(:overtime, overtime)
-        end
+        @attendance_today.update_attribute(:overtime, overtime)
       end
-      @attendance_today.overtime
     end
 end

@@ -28,6 +28,7 @@ group :development do
   gem "solargraph",          "0.50.0"
   gem "irb",                 "1.10.0"
   gem "repl_type_completor", "0.1.2"
+  gem "rails-erd"
 end
 
 group :test do
