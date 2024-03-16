@@ -1,14 +1,14 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "勤怠くん", root_path, id:"logo" %>
-    <nav>
-      <ul id = "navbar-menu" class="nav navbar-nav navbar-right collapse navbar-collapse">
+    <%= link_to "勤怠くん", root_path, id:"logo"%>
+    <nav >
+      <ul class="navbar-nav navbar-right" >
         <% if logged_in? %>
         <li><%= link_to "ログアウト", logout_path, data:{"turbo-method": :delete}, method: :delete %></li>
         <% else %>
         <li><%= link_to "管理者用ログイン", login_path %></li>
         <% end %>
       </ul>
-    </nav>  
+    </nav> 
   </div>
 </header>

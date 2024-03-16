@@ -1,4 +1,4 @@
-//@import "bootstrap-sprockets";
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 /* mixins, variables, etc. */
@@ -70,15 +70,25 @@ p {
   margin-right: 10px;
   font-size :1.7em;
   color: #fff;
-  text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 8px;
+  padding-bottom: 3px;
   font-weight: bold;
   &:hover {
     color: #fff;
     text-decoration: none;
   }
 }
+nav {
+  float: right;
+  margin-right: 5px;
+  padding-top: 10px;
+}
+header {
+  ul {
+    list-style: none;
+    }
+  }
 
 /* footer */
 
@@ -90,6 +100,14 @@ footer {
   small {
     float:left;
   }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
 }
 @media (max-width: 800px) {
   footer {
@@ -97,6 +115,14 @@ footer {
       display:block;
       float:none;
       margin-bottom:lem;
+    }
+    ul {
+      float:none;
+      padding: 0;
+      li {
+        float: none;
+        margin-left: 0;
+      }
     }
   }
 }
