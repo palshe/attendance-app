@@ -46,58 +46,80 @@
 ### 出勤と退勤
 ホーム画面のフォームに、登録されている従業員の名前を入力して、出退勤を選び、"送信"を押します。  
 あらかじめ、seedsにて従業員のサンプルをいくつか用意しています。まずは"石井春輝"でお試しください。
-![1](https://github.com/palshe/attendance-app/assets/151994170/2a59ae2d-4e44-410c-a431-6b621440c935)    
+![1](https://github.com/palshe/attendance-app/assets/151994170/2a59ae2d-4e44-410c-a431-6b621440c935)  
+<br>
 今日の出退勤情報が記録されました。(管理者がすでに本日のレコードを作成していなければなりません。)  
 ![2](https://github.com/palshe/attendance-app/assets/151994170/647191cf-45e6-49c3-b67b-321605e78505)  
+<br>
 ## 管理者の操作
 ### ログインとログアウト
 ホーム画面右上の"管理者用ログイン"をクリックします。  
 ![3](https://github.com/palshe/attendance-app/assets/151994170/5164773b-db05-4ab7-9d40-a8caaeb47955)  
+<br>
 パスワードが求められるので、管理者パスワードである"111111"を入力して、"ログイン"を押してください。  
 ![4](https://github.com/palshe/attendance-app/assets/151994170/8f579d25-9e52-4470-a501-37fe96168ae6)  
+<br>
 ログインできました。  
 ![5](https://github.com/palshe/attendance-app/assets/151994170/8c96dd47-7c39-49ea-ba2f-7ef705caf8ee)  
+<br>
 次に、管理者ホームの右上にある"ログアウト"をクリックします。  
 ![6](https://github.com/palshe/attendance-app/assets/151994170/e3d959ea-e203-4157-a93a-fbd14cfed452)  
+<br>
 ログアウトできました。  
 ![7](https://github.com/palshe/attendance-app/assets/151994170/b606a63d-b66a-4086-86a6-509caa76835a)  
+<br>
 ### 本日のレコードを作成
 管理者ホーム中央の"本日のレコードを作成"を押します。  
 ![8](https://github.com/palshe/attendance-app/assets/151994170/de6a0298-5647-4265-b3ce-6d5aac53099f)  
+<br>
 従業員全員分の本日のレコードが作成されました。  
 ![9](https://github.com/palshe/attendance-app/assets/151994170/583f7305-e09b-459f-9b26-ca6c583987f7)  
+<br>
 ### 従業員の追加
 管理者ホーム中央の"従業員追加"を押します。  
 ![10](https://github.com/palshe/attendance-app/assets/151994170/ff384a6f-3e1d-4442-a831-26b7e3a6dfd7)  
+<br>
 フォームに追加したい従業員の名前を入力して"追加する"を押してください。  
 ![11](https://github.com/palshe/attendance-app/assets/151994170/58e7e5b4-238d-4e14-8874-440cc6ecd5f2)  
+<br>
 追加できました。  
 ![12](https://github.com/palshe/attendance-app/assets/151994170/f06580f8-aa25-466a-b21f-a8ae802cea50)  
+<br>
 ### 従業員の一覧と削除
 管理者ホーム中央の"従業員一覧"を押します。  
 ![13](https://github.com/palshe/attendance-app/assets/151994170/2eb2c044-0f05-497d-b769-854da7a382fc)  
+<br>
 従業員一覧が表示されました。  
 次に、削除したい従業員名のすぐ右にある、"削除する"をクリックします("石井春輝"は削除しないでください)。  
 ![14](https://github.com/palshe/attendance-app/assets/151994170/266c5fb4-f38b-4965-afaf-fb39731daf38)  
+<br>
 "OK"を押します。  
 ![15](https://github.com/palshe/attendance-app/assets/151994170/718af62a-eefd-4041-b0ba-243444d3e6ea)  
+<br>
 選んだ従業員を削除できました。  
 ![16](https://github.com/palshe/attendance-app/assets/151994170/3eea335f-6a64-4700-b4c7-dd14dd163ac3)  
+<br>
 ### 従業員の個別表示と名前変更
 従業員一覧画面から、詳細が見たい従業員の名前をクリックします。("石井春輝"にはあらかじめ2月の勤怠記録を作成しました。)  
 ![17](https://github.com/palshe/attendance-app/assets/151994170/b0b7ead7-545d-4d05-a3a9-4509d05094ae)  
+<br>
 選んだ従業員の勤怠情報が表示されました。  
 名前の隣にある"変更"を押します。  
 ![18](https://github.com/palshe/attendance-app/assets/151994170/ebf583d0-6302-4b5d-b727-71ba16db71ce)  
+<br>
 フォームに変更したい名前を入力して、"変更する"を押してください。  
 ![19](https://github.com/palshe/attendance-app/assets/151994170/2cdfcc22-0ac4-498c-b7fd-1e040717e676)  
+<br>
 名前を変更できました。  
-![20](https://github.com/palshe/attendance-app/assets/151994170/c70584d4-058d-420f-9df5-9c22981797ac)　　
+![20](https://github.com/palshe/attendance-app/assets/151994170/c70584d4-058d-420f-9df5-9c22981797ac)  
+<br>
 ### 総残業時間の検索
 従業員個別ページの中央にある、日付フォームに残業時間を検索したい期間を入力して、"検索"を押してください。  
 ![21](https://github.com/palshe/attendance-app/assets/151994170/11b1b52c-c465-42ce-9199-d89752dd5f9c)  
+<br>
 指定した期間の総残業時間を検索することができました。  
 ![22](https://github.com/palshe/attendance-app/assets/151994170/682d6031-1ac4-4bdb-9daa-2b5e8f228510)  
+<br>
 # 使用技術一覧
 ### フロントエンド
 - HTML
