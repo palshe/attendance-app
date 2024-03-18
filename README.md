@@ -63,3 +63,5 @@
 ### その他
 - Puma
 - RSpec
+
+![DSCN1694](https://github.com/palshe/attendance-app/assets/151994170/7041d59f-85f4-4606-8643-e2ac3dea6088)
